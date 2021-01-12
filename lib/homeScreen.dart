@@ -7,10 +7,28 @@ class HomeScreen extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+        leading: Container(
+          margin: EdgeInsets.only(left: 10),
+          child: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {},
+          ),
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ),
+              onPressed: null)
+        ],
+      ),
       body: SafeArea(
         bottom: false,
         child: Container(
-          margin: EdgeInsets.only(top: 30),
           child: Row(
             children: [
               /* <----------- Side Menu ------------> */
@@ -29,6 +47,45 @@ class HomeScreen extends StatelessWidget {
                           size: 30,
                         ),
                       ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Text(
+                                'Sofa',
+                                style: h2.copyWith(color: Colors.grey),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Text(
+                                'Round Chair',
+                                style: h2.copyWith(color: Colors.grey),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Text(
+                                'Home',
+                                style: h2,
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Text(
+                                'Arm Chair',
+                                style: h2.copyWith(color: Colors.grey),
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -36,109 +93,113 @@ class HomeScreen extends StatelessWidget {
               /* <----------- Home Screen ------------> */
               Expanded(
                 flex: 5,
-                child: Container(
-                  padding: EdgeInsets.only(left: 30, top: 30),
-                  decoration: BoxDecoration(
-                    color: secondaryColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
+                child: CustomPaint(
+                  painter: RPSCustomPainter(),
+                  size: mediaQuery,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 30, top: 30),
+                    decoration: BoxDecoration(
+                      // color: secondaryColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /* <----------- Top HeadLine ------------> */
-                      Text(
-                        'Good Morning',
-                        style: lessImport,
-                      ),
-                      Text(
-                        'Dwi Lestari',
-                        style: h1,
-                      ),
-                      /* <----------- Categories ------------> */
-                      hGap20,
-                      Container(
-                        height: mediaQuery.height * 0.08,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            CategoriesTile(
-                              mediaQuery: mediaQuery,
-                              imageName: 'sofa',
-                              selected: true,
-                            ),
-                            CategoriesTile(
-                              mediaQuery: mediaQuery,
-                              imageName: 'lamp',
-                            ),
-                            CategoriesTile(
-                              mediaQuery: mediaQuery,
-                              imageName: 'cabinet',
-                            ),
-                            CategoriesTile(
-                              mediaQuery: mediaQuery,
-                              imageName: 'almirah',
-                            ),
-                          ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /* <----------- Top HeadLine ------------> */
+                        Text(
+                          'Good Morning',
+                          style: lessImport,
                         ),
-                      ),
-                      /* <----------- End Categories ------------> */
-                      hGap30,
-                      /* <----------- New Arrival ------------> */
-                      Text(
-                        'New Arrival',
-                        style: lessImport,
-                      ),
-                      hGap10,
-                      Container(
-                        height: mediaQuery.height * 0.25,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            ImageCardTile(
-                              mediaQuery: mediaQuery,
-                              image: 'sofa-0',
-                            ),
-                            ImageCardTile(
-                              mediaQuery: mediaQuery,
-                              image: 'sofa-3',
-                            ),
-                          ],
+                        Text(
+                          'Dwi Lestari',
+                          style: h1,
                         ),
-                      ),
-                      /* <----------- End New Arrival ------------> */
-                      hGap30,
-                      /* <----------- Recently Views ------------> */
-                      Text(
-                        'Recently Views',
-                        style: lessImport,
-                      ),
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            RecentlyViewCard(
-                              mediaQuery: mediaQuery,
-                              sofaImage: 'sofa-1',
-                              sofaPrice: '123',
-                              sofaName: 'Nestudio Sofa',
-                            ),
-                            RecentlyViewCard(
-                              mediaQuery: mediaQuery,
-                              sofaImage: 'sofa-2',
-                              sofaPrice: '243',
-                              sofaName: 'Picaso Sofa Emma',
-                            ),
-                            RecentlyViewCard(
-                              mediaQuery: mediaQuery,
-                              sofaImage: 'sofa-3',
-                              sofaPrice: '89',
-                              sofaName: 'Tina Sofa',
-                            )
-                          ],
+                        /* <----------- Categories ------------> */
+                        hGap20,
+                        Container(
+                          height: mediaQuery.height * 0.08,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              CategoriesTile(
+                                mediaQuery: mediaQuery,
+                                imageName: 'sofa',
+                                selected: true,
+                              ),
+                              CategoriesTile(
+                                mediaQuery: mediaQuery,
+                                imageName: 'lamp',
+                              ),
+                              CategoriesTile(
+                                mediaQuery: mediaQuery,
+                                imageName: 'cabinet',
+                              ),
+                              CategoriesTile(
+                                mediaQuery: mediaQuery,
+                                imageName: 'almirah',
+                              ),
+                            ],
+                          ),
                         ),
-                      )
-                    ],
+                        /* <----------- End Categories ------------> */
+                        hGap30,
+                        /* <----------- New Arrival ------------> */
+                        Text(
+                          'New Arrival',
+                          style: lessImport,
+                        ),
+                        hGap10,
+                        Container(
+                          height: mediaQuery.height * 0.25,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              ImageCardTile(
+                                mediaQuery: mediaQuery,
+                                image: 'sofa-0',
+                              ),
+                              ImageCardTile(
+                                mediaQuery: mediaQuery,
+                                image: 'sofa-3',
+                              ),
+                            ],
+                          ),
+                        ),
+                        /* <----------- End New Arrival ------------> */
+                        hGap30,
+                        /* <----------- Recently Views ------------> */
+                        Text(
+                          'Recently Views',
+                          style: lessImport,
+                        ),
+                        Expanded(
+                          child: ListView(
+                            children: [
+                              RecentlyViewCard(
+                                mediaQuery: mediaQuery,
+                                sofaImage: 'sofa-1',
+                                sofaPrice: '123',
+                                sofaName: 'Nestudio Sofa',
+                              ),
+                              RecentlyViewCard(
+                                mediaQuery: mediaQuery,
+                                sofaImage: 'sofa-2',
+                                sofaPrice: '243',
+                                sofaName: 'Picaso Sofa Emma',
+                              ),
+                              RecentlyViewCard(
+                                mediaQuery: mediaQuery,
+                                sofaImage: 'sofa-3',
+                                sofaPrice: '89',
+                                sofaName: 'Tina Sofa',
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -150,6 +211,57 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+/* <----------- Custom Paint For The Container ------------> */
+class RPSCustomPainter extends CustomPainter {
+  /* <-----------------------> 
+      You can animate the path programitcally. The height of the curve will be marked down here. I am putting static value because this is just a UI build, 
+      if you want to use it in your projects then you can add values to this    
+   <-----------------------> */
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    /* <----------- Container ------------> */
+    Paint paint_0 = new Paint()
+      ..color = secondaryColor
+      ..style = PaintingStyle.fill;
+
+    Path path_0 = Path();
+    path_0.moveTo(0, size.height);
+    // The starting height of the curve from the bottom
+    path_0.lineTo(0, size.height * 0.71);
+    // You can just edit this to get your desired results
+    path_0.quadraticBezierTo(
+        size.width * 0.13, size.height * 0.62, 0, size.height * 0.53);
+    path_0.cubicTo(
+        0, size.height * 0.35, 0, size.height * 0.15, 0, size.height * 0.06);
+    path_0.cubicTo(size.width * -0.00, size.height * 0.02, size.width * 0.05,
+        size.height * 0.01, size.width * 0.10, 0);
+    path_0.quadraticBezierTo(
+        size.width * 0.33, size.height * 0.00, size.width, 0);
+    path_0.lineTo(size.width, size.height);
+    path_0.lineTo(0, size.height);
+    path_0.close();
+
+    /* <----------- Circle ------------> */
+    Paint paint_1 = new Paint()
+      ..color = thirdColor
+      ..style = PaintingStyle.fill;
+
+    canvas.drawPath(path_0, paint_0);
+    canvas.drawCircle(Offset(0, size.height * 0.61), 6, paint_1);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+/* <-----------------------> 
+    Re usable Widgets    
+ <-----------------------> */
+
+/* <----------- Recently View Card ------------> */
 class RecentlyViewCard extends StatelessWidget {
   const RecentlyViewCard({
     Key key,
@@ -202,6 +314,7 @@ class RecentlyViewCard extends StatelessWidget {
   }
 }
 
+/* <----------- For Image and the Text ------------> */
 class ImageCardTile extends StatelessWidget {
   const ImageCardTile({
     Key key,
@@ -263,8 +376,7 @@ class ImageCardTile extends StatelessWidget {
   }
 }
 
-/* <----------- To make code clean ------------> */
-
+/* <----------- Categories ------------> */
 class CategoriesTile extends StatelessWidget {
   const CategoriesTile({
     Key key,
