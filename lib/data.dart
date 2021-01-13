@@ -30,6 +30,13 @@ const TextStyle lessImport = TextStyle(
   color: Color(0xFFF7F5FE),
 );
 
+const TextStyle menuText = TextStyle(
+  fontSize: 20,
+  color: Color(0xFFE2CFFF),
+  fontWeight: FontWeight.bold,
+  height: 1.3,
+);
+
 /* <----------- Height Gap ------------> */
 const hGap5 = SizedBox(height: 5);
 const hGap10 = SizedBox(height: 10);

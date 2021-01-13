@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sofa_shop_ui/data.dart';
+import 'package:sofa_shop_ui/detailsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -23,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                 Icons.more_vert,
                 color: Colors.white,
               ),
-              onPressed: null)
+              onPressed: () {})
         ],
       ),
       body: SafeArea(
@@ -55,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                               quarterTurns: 3,
                               child: Text(
                                 'Sofa',
-                                style: h2.copyWith(color: Colors.grey),
+                                style: menuText,
                                 textDirection: TextDirection.ltr,
                               ),
                             ),
@@ -63,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                               quarterTurns: 3,
                               child: Text(
                                 'Round Chair',
-                                style: h2.copyWith(color: Colors.grey),
+                                style: menuText,
                                 textDirection: TextDirection.ltr,
                               ),
                             ),
@@ -71,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                               quarterTurns: 3,
                               child: Text(
                                 'Home',
-                                style: h2,
+                                style: menuText.copyWith(color: Colors.white),
                                 textDirection: TextDirection.ltr,
                               ),
                             ),
@@ -79,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                               quarterTurns: 3,
                               child: Text(
                                 'Arm Chair',
-                                style: h2.copyWith(color: Colors.grey),
+                                style: menuText,
                                 textDirection: TextDirection.ltr,
                               ),
                             ),
@@ -94,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 flex: 5,
                 child: CustomPaint(
-                  painter: RPSCustomPainter(),
+                  painter: ContainerCustomPaint(),
                   size: mediaQuery,
                   child: Container(
                     padding: EdgeInsets.only(left: 30, top: 30),
@@ -157,10 +159,26 @@ class HomeScreen extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             children: [
                               ImageCardTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => ProductDetails(),
+                                    ),
+                                  );
+                                },
                                 mediaQuery: mediaQuery,
                                 image: 'sofa-0',
                               ),
                               ImageCardTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => ProductDetails(),
+                                    ),
+                                  );
+                                },
                                 mediaQuery: mediaQuery,
                                 image: 'sofa-3',
                               ),
@@ -212,7 +230,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 /* <----------- Custom Paint For The Container ------------> */
-class RPSCustomPainter extends CustomPainter {
+class ContainerCustomPaint extends CustomPainter {
   /* <-----------------------> 
       You can animate the path programitcally. The height of the curve will be marked down here. I am putting static value because this is just a UI build, 
       if you want to use it in your projects then you can add values to this    
@@ -228,10 +246,10 @@ class RPSCustomPainter extends CustomPainter {
     Path path_0 = Path();
     path_0.moveTo(0, size.height);
     // The starting height of the curve from the bottom
-    path_0.lineTo(0, size.height * 0.71);
+    path_0.lineTo(0, size.height * 0.68);
     // You can just edit this to get your desired results
     path_0.quadraticBezierTo(
-        size.width * 0.13, size.height * 0.62, 0, size.height * 0.53);
+        size.width * 0.13, size.height * 0.62, 0, size.height * 0.56);
     path_0.cubicTo(
         0, size.height * 0.35, 0, size.height * 0.15, 0, size.height * 0.06);
     path_0.cubicTo(size.width * -0.00, size.height * 0.02, size.width * 0.05,
@@ -248,7 +266,7 @@ class RPSCustomPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(path_0, paint_0);
-    canvas.drawCircle(Offset(0, size.height * 0.61), 6, paint_1);
+    canvas.drawCircle(Offset(0, size.height * 0.62), 6, paint_1);
   }
 
   @override
@@ -320,57 +338,62 @@ class ImageCardTile extends StatelessWidget {
     Key key,
     @required this.mediaQuery,
     @required this.image,
+    @required this.onTap,
   }) : super(key: key);
 
   final Size mediaQuery;
   final String image;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      width: mediaQuery.width * 0.6,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            height: mediaQuery.height * 0.12,
-            child: Image.asset(
-              'assets/$image.png',
-              fit: BoxFit.fitWidth,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        width: mediaQuery.width * 0.6,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: mediaQuery.height * 0.12,
+              child: Image.asset(
+                'assets/$image.png',
+                fit: BoxFit.fitWidth,
+              ),
             ),
-          ),
-          // You can use auto size text here
-          Positioned(
-            bottom: 0,
-            left: 10,
-            child: Container(
-              child: Text(
-                'Antik Mebel \n Vanya Sofa',
-                style: h2.copyWith(
-                  color: Color(0xFF272727),
-                  fontSize: 20,
+            // You can use auto size text here
+            Positioned(
+              bottom: 0,
+              left: 10,
+              child: Container(
+                child: Text(
+                  'Antik Mebel \n Vanya Sofa',
+                  style: h2.copyWith(
+                    color: Color(0xFF272727),
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              child: Text(
-                '\$374',
-                style: h2.copyWith(
-                  color: primaryColor,
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Container(
+                child: Text(
+                  '\$374',
+                  style: h2.copyWith(
+                    color: primaryColor,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
