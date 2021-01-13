@@ -163,7 +163,9 @@ class HomeScreen extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     CupertinoPageRoute(
-                                      builder: (context) => ProductDetails(),
+                                      builder: (context) => ProductDetails(
+                                        productName: 'sofa-0',
+                                      ),
                                     ),
                                   );
                                 },
@@ -175,7 +177,9 @@ class HomeScreen extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     CupertinoPageRoute(
-                                      builder: (context) => ProductDetails(),
+                                      builder: (context) => ProductDetails(
+                                        productName: 'sofa-3',
+                                      ),
                                     ),
                                   );
                                 },
@@ -361,9 +365,12 @@ class ImageCardTile extends StatelessWidget {
           children: [
             Container(
               height: mediaQuery.height * 0.12,
-              child: Image.asset(
-                'assets/$image.png',
-                fit: BoxFit.fitWidth,
+              child: Hero(
+                tag: image,
+                child: Image.asset(
+                  'assets/$image.png',
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
             // You can use auto size text here

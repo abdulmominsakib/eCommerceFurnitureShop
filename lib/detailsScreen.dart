@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sofa_shop_ui/data.dart';
 
 class ProductDetails extends StatelessWidget {
+  final String productName;
+
+  const ProductDetails({Key key, @required this.productName}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -31,7 +35,7 @@ class ProductDetails extends StatelessWidget {
                     children: [
                       /* <----------- Text Block ------------> */
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 30),
+                        margin: EdgeInsets.only(left: 30),
                         width: size.width * 0.5,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,9 +57,13 @@ class ProductDetails extends StatelessWidget {
                           Container(
                               margin: EdgeInsets.only(right: 20),
                               width: size.width * 0.9,
-                              child: Image.asset(
-                                'assets/sofa-0.png',
-                                fit: BoxFit.fitHeight,
+                              height: size.height * 0.25,
+                              child: Hero(
+                                tag: productName,
+                                child: Image.asset(
+                                  'assets/$productName.png',
+                                  fit: BoxFit.fitHeight,
+                                ),
                               )),
                         ],
                       ),
@@ -65,7 +73,7 @@ class ProductDetails extends StatelessWidget {
               ),
             ),
             /* <----------- End of Image Section ------------> */
-
+            hGap20,
             /* <----------- Gallery ------------> */
             Container(
               height: size.height * 0.08,
